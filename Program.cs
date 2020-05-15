@@ -1,86 +1,29 @@
 ﻿using System;
+using System.Reflection;
 
-namespace AshwiniApp
+namespace ReflectionDemo
 {
     class Program
     {
-        
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            Example1 e = new Example1();
+            Type m1 = typeof(Example1);
+            foreach (object a in m1.GetCustomAttributes(true))
+            {
+                Console.WriteLine(a.ToString());
+            }
+            Example1.Executemain();
+
+            MethodInfo[] n= m1.GetMethods();
+            foreach (MemberInfo a in n) {
+                Console.WriteLine(a.Name+"  "+a.GetType());
+            }
+
+            Type m3 = typeof(Ex2);
+            MethodInfo[] d1 = m3.GetMethods();
+            foreach (MethodInfo nn in d1) { Console.WriteLine(nn.Name); }
+        }
     }
-    class TestClass
-    {
-        public class Shape
-        {
-            public const double PI = Math.PI;
-            protected double x, y;
-
-            public Shape()
-            {
-            }
-
-            public Shape(double x, double y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public virtual double Area()
-            {
-                return x * y;
-            }
-        }
-
-        public class Circle : Shape
-        {
-            public Circle(double r) : base(r, 0)
-            {
-            }
-
-            public override double Area()
-            {
-                return PI * x * x;
-            }
-        }
-
-        class Sphere : Shape
-        {
-            public Sphere(double r) : base(r, 0)
-            {
-            }
-
-            public override double Area()
-            {
-                return 4 * PI * x * x;
-            }
-        }
-
-        class Cylinder : Shape
-        {
-            public Cylinder(double r, double h) : base(r, h)
-            {
-            }
-
-            public override double Area()
-            {
-                return 2 * PI * x * x + 2 * PI * x * y;
-            }
-        }
-
-        /**static void Main()
-        {
-            double r = 3.0, h = 5.0;
-            Shape c = new Circle(r);
-            Shape s = new Sphere(r);
-            Shape l = new Cylinder(r, h);
-            // Display results.
-            Console.WriteLine("Area of Circle   = {0:F2}", c.Area());
-            Console.WriteLine("Area of Sphere   = {0:F2}", s.Area());
-            Console.WriteLine("Area of Cylinder = {0:F2}", l.Area());
-        }**/
-    }
-    /*
-    Output:
-    Area of Circle   = 28.27
-    Area of Sphere   = 113.10
-    Area of Cylinder = 150.80
-    */
 }
